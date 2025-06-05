@@ -1,8 +1,8 @@
 services:
   app:
     build:
-      context: ./post-service/Post Service
-      dockerfile: ../Dockerfile
+      context: ./post-service
+      dockerfile: Dockerfile
     container_name: post-service
     hostname: post-service
     restart: unless-stopped
