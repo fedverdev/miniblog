@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestRestController {
-    @GetMapping("/test-public")
+    @GetMapping("/public/test")
     public String test() {
-        return "test";
+        return "it is a public test";
     }
 
-    @GetMapping("/test-private")
+    @GetMapping("/private/test")
     public String testPrivate(@RequestHeader("X-User-ID") String xUserId) {
         return "your user id is " + xUserId;
     }
