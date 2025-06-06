@@ -17,6 +17,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./api-gateway-service:/etc/nginx/conf.d
+      - ./api-gateway-service/public:/etc/nginx/public
+      - ./api-gateway-service/private:/etc/nginx/private
+      - ./api-gateway-service/conf.d:/etc/nginx/conf.d
+      - ./api-gateway-service/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - post-service
