@@ -2,6 +2,20 @@ spring:
   application:
     name: post-service
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - mappings
+          - health
+          - info
+  endpoint:
+    health:
+      show-details: always
+    mappings:
+      enabled: true
+
 logging:
   level:
     org:
@@ -9,7 +23,3 @@ logging:
         web:
           servlet:
             DispatcherServlet: DEBUG
-
-server:
-  servlet:
-    context-path: /
