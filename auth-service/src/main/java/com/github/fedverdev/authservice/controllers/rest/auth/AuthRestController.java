@@ -22,4 +22,9 @@ public class AuthRestController {
         authUsersService.register(username, password);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/validate")
+    public ResponseEntity<?> validate() throws BadRequestException {
+        return ResponseEntity.ok().build();
+    }
 }
