@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025.06-init
+      author: Fedor Verbitsky
+      changes:
+        - sqlFile:
+            path: sql/create-auth_users.sql
+            relativeToChangelogFile: true
