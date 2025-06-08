@@ -18,7 +18,6 @@ import java.util.Map;
 @ControllerAdvice
 public class ValidationExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(
             MethodArgumentNotValidException ex,
@@ -36,7 +35,6 @@ public class ValidationExceptionHandler {
         ));
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(
             HttpMessageNotReadableException ex,
@@ -52,7 +50,6 @@ public class ValidationExceptionHandler {
         ));
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(UsernameAlreadyExistsException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(
             UsernameAlreadyExistsException ex,
@@ -60,9 +57,9 @@ public class ValidationExceptionHandler {
     ) {
         Map<String, String> errors = new HashMap<>();
         errors.put("username", ex.getMessage());
-        return ResponseEntity.badRequest().body(new ErrorResponse(
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(
                 new Timestamp(System.currentTimeMillis()),
-                400,
+                409,
                 errors,
                 request.getRequestURI()
         ));
