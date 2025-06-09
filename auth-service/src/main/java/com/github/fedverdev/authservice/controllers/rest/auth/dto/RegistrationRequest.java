@@ -32,6 +32,6 @@ public class RegistrationRequest {
     @JsonProperty(value = "last_name")
     private String lastName;
 
-    @JsonProperty(value = "last_name")
+    @JsonProperty(value = "email")
     private String email;
 }

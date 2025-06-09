@@ -17,7 +17,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import java.io.IOException;
 
 public class JsonUsernamePasswordAuthFilter extends UsernamePasswordAuthenticationFilter {
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
