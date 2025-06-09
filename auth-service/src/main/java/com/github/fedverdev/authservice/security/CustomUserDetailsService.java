@@ -19,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AuthUsersTable authUser = authUsersRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        AuthUsersTable authUser = authUsersRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return new User(username, authUser.getPassword(), List.of());
     }
 }

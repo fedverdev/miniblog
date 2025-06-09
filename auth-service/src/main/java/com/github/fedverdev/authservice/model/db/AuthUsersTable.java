@@ -1,9 +1,6 @@
 package com.github.fedverdev.authservice.model.db;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 @Entity
 @Table(name = "auth_users")
@@ -19,6 +17,10 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class AuthUsersTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
+    private UUID id;
+
     @Column(name = "username")
     private String username;
 
