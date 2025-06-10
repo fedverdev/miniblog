@@ -16,10 +16,8 @@ public class AuthRestController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest request) {
-        String username = request.getUsername();
-        String password = request.getPassword();
-        authUsersService.register(username, password);
-        return ResponseEntity.ok().build();
+        String username = authUsersService.attemptRegister(request).getUsername();
+        return ResponseEntity.ok().body("User " + username + " registered successfully");
     }
 
     @PostMapping("/validate")

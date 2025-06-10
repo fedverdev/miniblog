@@ -1,6 +1,7 @@
 package com.github.fedverdev.authservice.controllers.rest.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.fedverdev.Profile;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -34,4 +35,14 @@ public class RegistrationRequest {
 
     @JsonProperty(value = "email")
     private String email;
+
+    public Profile convertToGrpcMessage(String userId) {
+        return Profile.newBuilder()
+                .setUserId(userId)
+                .setUsername(this.username)
+                .setFirstName(this.firstName)
+                .setLastName(this.lastName)
+                .setEmail(this.email)
+                .build();
+    }
 }
