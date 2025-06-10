@@ -23,3 +23,9 @@ spring:
     redis:
       host: ${REDIS_HOST:localhost}
       port: 6379
+
+  grpc:
+    client:
+      profile-service:
+        address: ${PROFILE_SERVICE_GRPC_ADDRESS:static://localhost:9090}
+        negotiationType: plaintext
