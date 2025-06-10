@@ -1,10 +1,8 @@
 package com.github.fedverdev.authservice.model.db;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.sql.Timestamp;
