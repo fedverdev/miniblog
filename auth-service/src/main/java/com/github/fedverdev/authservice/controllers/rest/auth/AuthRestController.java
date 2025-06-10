@@ -4,7 +4,6 @@ import com.github.fedverdev.authservice.controllers.rest.auth.dto.RegistrationRe
 import com.github.fedverdev.authservice.services.AuthUsersService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +15,7 @@ public class AuthRestController {
     private AuthUsersService authUsersService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest request) throws BadRequestException {
+    public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest request) {
         String username = request.getUsername();
         String password = request.getPassword();
         authUsersService.register(username, password);
@@ -24,7 +23,7 @@ public class AuthRestController {
     }
 
     @PostMapping("/validate")
-    public ResponseEntity<?> validate() throws BadRequestException {
+    public ResponseEntity<?> validate() {
         return ResponseEntity.ok().build();
     }
 }
