@@ -160,11 +160,9 @@
 				<artifactId>protobuf-maven-plugin</artifactId>
 				<version>0.6.1</version>
 				<configuration>
-					<!--suppress UnresolvedMavenProperty -->
-					<protocArtifact>com.google.protobuf:protoc:3.24.4:${os.detected.classifier}</protocArtifact>
+					<protocArtifact>com.google.protobuf:protoc:3.22.2:exe:${os.detected.classifier}</protocArtifact>
 					<pluginId>grpc-java</pluginId>
-					<!--suppress UnresolvedMavenProperty -->
-					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.59.0:${os.detected.classifier}</pluginArtifact>
+					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.63.0:exe:${os.detected.classifier}</pluginArtifact>
 				</configuration>
 				<executions>
 					<execution>
