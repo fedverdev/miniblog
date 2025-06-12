@@ -27,5 +27,7 @@ spring:
   grpc:
     client:
       profile-service:
-        address: ${PROFILE_SERVICE_GRPC_ADDRESS:static://localhost:9090}
+        address: static://localhost:9090
         negotiationType: plaintext
+      local:
+        address: 0.0.0.0:9090

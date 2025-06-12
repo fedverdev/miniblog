@@ -1,6 +1,7 @@
 package com.github.fedverdev.authservice.services;
 
 import com.github.fedverdev.authservice.controllers.rest.auth.dto.RegistrationRequest;
+import com.github.fedverdev.authservice.exceptions.RegistrationFailedException;
 import com.github.fedverdev.authservice.exceptions.UsernameAlreadyExistsException;
 import com.github.fedverdev.authservice.model.db.AuthUsersTable;
 import com.github.fedverdev.authservice.repository.AuthUsersRepository;
@@ -9,8 +10,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.net.UnknownHostException;
 
 @Service
 @AllArgsConstructor
@@ -35,16 +34,12 @@ public class AuthUsersService {
     @Transactional
     public AuthUsersTable attemptRegister(RegistrationRequest request) throws RuntimeException {
         AuthUsersTable authUser = registerAuth(request.getUsername(), request.getPassword());
-        try {
-            var response = authServiceGrpcClient.attemptRegisterProfile(request.convertToGrpcMessage(authUser.getId().toString()));
-            if (response == null || !response.getOk()) {
-                commitCompensation(authUser);
-                throw new RuntimeException("Registration failed");
-            } else {
-                return authUser;
-            }
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Registration failed");
+        var response = authServiceGrpcClient.attemptRegisterProfile(request.convertToGrpcMessage(authUser.getId().toString()));
+        if (response == null || !response.getOk()) {
+            commitCompensation(authUser);
+            throw new RegistrationFailedException();
+        } else {
+            return authUser;
         }
     }
 }

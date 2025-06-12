@@ -1,5 +1,6 @@
 package com.github.fedverdev.authservice.exceptions.handler;
 
+import com.github.fedverdev.authservice.exceptions.RegistrationFailedException;
 import com.github.fedverdev.authservice.exceptions.UsernameAlreadyExistsException;
 import com.github.fedverdev.authservice.exceptions.handler.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -61,6 +62,19 @@ public class ValidationExceptionHandler {
                 new Timestamp(System.currentTimeMillis()),
                 409,
                 errors,
+                request.getRequestURI()
+        ));
+    }
+
+    @ExceptionHandler(RegistrationFailedException.class)
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(
+            RegistrationFailedException ex,
+            HttpServletRequest request
+    ) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(
+                new Timestamp(System.currentTimeMillis()),
+                500,
+                "Registration failed",
                 request.getRequestURI()
         ));
     }
