@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.github.fedverdev";
+
+message Profile {
+  string user_id = 1;
+  string username = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string email = 5;
+}
+
+message ProfileCreationResponse {
+  string user_id = 1;
+  bool ok = 2;
+}
+
+service ProfileService {
+  rpc AttemptRegisterProfile (Profile) returns (ProfileCreationResponse);
+}
