@@ -6,6 +6,8 @@ WORKDIR /app
 
 RUN apk add --no-cache maven
 
+RUN apk add --no-cache curl unzip gcompat
+
 # Копируем только pom.xml сначала (для кэширования зависимостей)
 COPY pom.xml .
 
