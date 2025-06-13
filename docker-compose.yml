@@ -33,7 +33,7 @@ services:
     hostname: auth-service
     restart: unless-stopped
     environment:
-      REDIS_HOST: auth-service-redis
+      REDIS_HOST: redis
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/auth_service_db
     expose:
       - "8080"
