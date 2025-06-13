@@ -23,3 +23,7 @@ spring:
     redis:
       host: ${REDIS_HOST:localhost}
       port: 6379
+
+grpc:
+  profile-service:
+    domain: ${PROFILE_SERVICE_DOMAIN:localhost}
