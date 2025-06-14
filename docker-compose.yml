@@ -37,9 +37,23 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/auth_service_db
     expose:
       - "8080"
+      - "9090"
     depends_on:
       - redis
       - db
+
+  profile-service:
+    build:
+      context: ./profile-service
+      dockerfile: Dockerfile
+    container_name: profile-service
+    hostname: profile-service
+    restart: unless-stopped
+    expose:
+      - "8080"
+      - "9090"
+    depends_on:
+      - auth-service
 
   redis:
     image: redis:7.2-alpine
