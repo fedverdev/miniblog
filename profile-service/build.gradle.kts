@@ -52,3 +52,9 @@ protobuf {
         }
     }
 }
+
+ktor {
+    fatJar {
+        archiveFileName.set("profile-service.jar")
+    }
+}
