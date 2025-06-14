@@ -35,6 +35,7 @@ services:
     environment:
       REDIS_HOST: redis
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/auth_service_db
+      PROFILE_SERVICE_DOMAIN: profile-service
     expose:
       - "8080"
       - "9090"
