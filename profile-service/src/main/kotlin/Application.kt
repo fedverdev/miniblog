@@ -1,5 +1,6 @@
 package com.github.fedverdev
 
+import com.github.fedverdev.grpc.runGrpcServer
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -8,4 +9,5 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     configureRouting()
+    runGrpcServer()
 }
