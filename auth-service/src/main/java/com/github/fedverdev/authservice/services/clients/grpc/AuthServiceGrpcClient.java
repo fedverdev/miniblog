@@ -14,13 +14,11 @@ public class AuthServiceGrpcClient {
 
     @Value("${grpc.profile-service.domain}")
     private String profileServiceDomain;
-
-    private ManagedChannel channel;
     private ProfileServiceGrpc.ProfileServiceBlockingStub stub;
 
     @PostConstruct
     public void init() {
-        channel = ManagedChannelBuilder.forAddress(profileServiceDomain, 9090)
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(profileServiceDomain, 9090)
                 .usePlaintext()
                 .build();
         stub = ProfileServiceGrpc.newBlockingStub(channel);
