@@ -50,11 +50,15 @@ services:
     container_name: profile-service
     hostname: profile-service
     restart: unless-stopped
+    environment:
+      DATABASE_HOST: db
+      DATABASE_NAME: profile_service_db
     expose:
       - "8080"
       - "9090"
     depends_on:
       - auth-service
+      - db
 
   redis:
     image: redis:7.2-alpine

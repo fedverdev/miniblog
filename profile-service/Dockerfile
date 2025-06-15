@@ -16,7 +16,7 @@ RUN apk add --no-cache curl unzip gcompat && \
     chmod +x gradlew
 
 # Собираем проект
-RUN ./gradlew build
+RUN ./gradlew clean build
 
 
 FROM gcr.io/distroless/java21-debian12

@@ -5,6 +5,7 @@ plugins {
     kotlin("jvm") version "2.1.10"
     id("io.ktor.plugin") version "3.2.0"
     id("com.google.protobuf") version "0.9.5"
+
 }
 
 group = "com.github.fedverdev"
@@ -32,6 +33,20 @@ dependencies {
     implementation("io.grpc:grpc-protobuf:1.73.0")
     implementation("io.grpc:grpc-stub:1.73.0")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
+
+    /* db */
+    implementation("org.jetbrains.exposed:exposed-core:0.61.0")
+    runtimeOnly("org.jetbrains.exposed:exposed-jdbc:0.61.0")
+    implementation("org.jetbrains.exposed:exposed-dao:0.61.0")
+    implementation("com.zaxxer:HikariCP:6.3.0")
+    implementation("org.flywaydb:flyway-database-postgresql:11.9.1")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.61.0")
+
+    implementation("org.postgresql:postgresql:42.7.7")
+
+    /* config */
+    implementation("com.typesafe:config:1.4.3")
+    implementation("io.ktor:ktor-server-config-yaml:3.2.0")
 }
 
 protobuf {
@@ -53,8 +68,12 @@ protobuf {
     }
 }
 
-ktor {
-    fatJar {
+tasks.named("shadowJar") {
+    (this as com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar).apply {
         archiveFileName.set("profile-service.jar")
+        mergeServiceFiles()
+        manifest {
+            attributes["Main-Class"] = "io.ktor.server.netty.EngineMain"
+        }
     }
 }
