@@ -4,7 +4,10 @@ import com.github.fedverdev.authservice.controllers.rest.auth.dto.RegistrationRe
 import com.github.fedverdev.authservice.services.AuthUsersService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +23,10 @@ public class AuthRestController {
         return ResponseEntity.ok().body("User " + username + " registered successfully");
     }
 
-    @PostMapping("/validate")
+    @GetMapping("/validate")
     public ResponseEntity<?> validate() {
-        return ResponseEntity.ok().build();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-User-ID", authUsersService.validate().toString());
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 }
